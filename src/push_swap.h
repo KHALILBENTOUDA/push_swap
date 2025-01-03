@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:36:32 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/02 17:03:33 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:11:44 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ void sb(t_stack **b);
 void ss(t_stack **a, t_stack **b);
 void pb(t_stack **a, t_stack **b);
 void pa(t_stack **a, t_stack **b);
+void ra(t_stack **a);
+void rb(t_stack **a);
+void rra(t_stack **a);
+void rrb(t_stack **b);
+void rrr(t_stack **b, t_stack **a);
+
+
+t_stack *get_last_node(t_stack *list);
+
 
 
 #endif

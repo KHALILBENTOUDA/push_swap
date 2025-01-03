@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:37:35 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/02 18:15:29 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:42:06 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void fill_stack(t_stack **a, char **content)
         if (*a)
         {
             last_node = *a;
-            while(last_node->next)
-                last_node = last_node->next;
+            last_node = get_last_node(last_node);
             new_node->prev = last_node;
             last_node->next = new_node;
         }
@@ -58,11 +57,14 @@ void printf_stack(t_stack *stack)
         return ;
     while (stack != NULL)
     {
-        ft_printf("%d, ",stack->value);
+        ft_printf("%d \n",stack->value);
         stack = stack->next;
     }
 }
-
+void af()
+{
+    system("leaks a.out");
+}
 int main(int ac, char **av)
 {
     t_stack *a;
@@ -73,10 +75,20 @@ int main(int ac, char **av)
     if (ac < 2)
         ft_printf("Error\n");
     fill_stack(&a,av);
+    sa(&a);
     pb(&a, &b);
+    pb(&a, &b);
+    pb(&a, &b);
+    // ra(&a);
+    // rb(&b);
+    // rra(&a);
+    // rrb(&b);
+    // sa(&a);
+    // pa(&a, &b);
+    // pa(&a, &b);
+    // pa(&a, &b);
     printf_stack(a);
-    ft_printf("\n");
+    printf("\n");
     printf_stack(b);
-
     return (0);
 }
