@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:37:35 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/03 15:42:06 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/03 21:22:12 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,8 @@ int main(int ac, char **av)
     a = NULL;
     b = NULL;
     if (ac < 2)
-        ft_printf("Error\n");
+        return (0);
+    check_input(av, ac);
     fill_stack(&a,av);
-    sa(&a);
-    pb(&a, &b);
-    pb(&a, &b);
-    pb(&a, &b);
-    // ra(&a);
-    // rb(&b);
-    // rra(&a);
-    // rrb(&b);
-    // sa(&a);
-    // pa(&a, &b);
-    // pa(&a, &b);
-    // pa(&a, &b);
-    printf_stack(a);
-    printf("\n");
-    printf_stack(b);
     return (0);
 }
