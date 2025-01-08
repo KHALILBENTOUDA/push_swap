@@ -1,32 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:36:17 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/07 15:15:12 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/07 20:31:02 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int turn_around(int stack_len, int index)
+{
+    if (index >= stack_len - 1)
+        return (0);
+    else
+        return (index + 1);
+}
+
 static int *find_the_lis(int *lis, int *temp_array, int stack_len)
 {
     int i;
     int j;
+    int a;
+    int hold_value;
 
     i = 0;
     while (i < stack_len)
     {
-        j = 0;
-        while (j < i)
+        hold_value = temp_array[i];
+        a = 1;
+        j = turn_around(stack_len, i);
+        while (j != i)
         {
-            if (temp_array[i] > temp_array[j] && lis[j] + 1 > lis[i])
-                lis[i] = lis[j] + 1;
-            j++;
+            if (temp_array[j] > hold_value)
+            {
+                a++;
+                hold_value = temp_array[j];
+            }
+            j = turn_around(stack_len, j);
         }
+        lis[i] = a;
         i++;
     }
     return (lis);
@@ -48,19 +64,33 @@ static void find_max_lis(int *lis, int *max, int stack_len, int *index)
     }
 }
 
-static int *fill_and_compare_lis(int *final_lis, int *lis, int *temp_array, int max_index, int max_lis)
+static int *fill_and_compare_lis(int *final_lis, int *lis, int *temp_array, int stack_len)
 {
-    while (max_index >= 0)
+    int j;
+    int first_position;
+    int b;
+    int max_index;
+    int max_lis;
+
+    b = 0;
+    find_max_lis(lis, &max_lis, stack_len, &max_index);
+    final_lis[b++] = temp_array[max_index];
+    first_position = max_index;
+    j = turn_around(stack_len, max_index);
+
+    while (j != first_position)
     {
-        if (max_lis == lis[max_index])
+        if (temp_array[j] > temp_array[max_index])
         {
-            final_lis[max_lis - 1] = temp_array[max_index];
-            max_lis--;
+            final_lis[b] = temp_array[j];
+            b++;
+            max_index = j;
         }
-        max_index--;
+        j = turn_around(stack_len, j);
     }
     return (final_lis);
 }
+
 
 void init_array(int stack_len, t_stack *iter, int *temp_array, int *lis)
 {
@@ -92,12 +122,13 @@ int *get_lis(t_stack **stack, int stack_len, int *lis_size)
     if (!lis || !temp_array)
         return (NULL);
     init_array(stack_len, iter, temp_array, lis);
+    
     lis = find_the_lis(lis, temp_array, stack_len);
     find_max_lis(lis, &max_lis, stack_len, &max_index);
     final_lis = malloc(sizeof(int) * max_lis);
     if (!final_lis)
         return (NULL);
-    final_lis = fill_and_compare_lis(final_lis, lis, temp_array, max_index, max_lis);
+    final_lis = fill_and_compare_lis(final_lis, lis, temp_array, stack_len);
     *lis_size = max_lis;
     return (free(temp_array), free(lis), final_lis);
 }

@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:08:16 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/03 18:49:24 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:55:32 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,6 @@ t_stack *get_last_node(t_stack *list)
         list = list->next;
     return (list);
 }
-
-// static void push(t_stack **head, t_stack **stack)
-// {
-//     t_stack *last_node;
-//     t_stack *last_head;
-
-//     if (!stack || !*stack || !head)
-//         return ;
-//     last_node = get_last_node(*stack);
-//     if ((*stack)->next == NULL)
-//         *stack = NULL;
-//     else
-//         last_node->prev->next = NULL;
-//     last_node->prev = NULL;
-//     if (*head != NULL)
-//     {
-//         last_head = get_last_node(*head);
-//         last_node->prev = last_head;
-//         last_head->next = last_node;
-//     }
-//     else
-//         (*head) = last_node;
-// }
 
 static void push(t_stack **head, t_stack **stack)
 {

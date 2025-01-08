@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:02:27 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/03 22:23:25 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/04 15:36:11 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void is_signed_number(char **inputs)
     int j;
     char *nb;
 
-    i = 1;
+    i = 0;
+    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0)
+        i = 1;
     while(inputs[i])
     {
         j = 0;
@@ -36,18 +38,37 @@ static void is_signed_number(char **inputs)
     }
 }
 
+static void is_max_min(char **inputs)
+{
+    int i;
+    char *nb;
+
+    i = 0;
+    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0)
+        i = 1;
+    while(inputs[i])
+    {
+        nb = inputs[i];
+        if (long_ft_atoi(inputs[i]) > 2147483647 || long_ft_atoi(inputs[i]) < -2147483648)
+            ft_exit();
+        i++;
+    }
+}
+
 static void is_number_duplicated(char **inputs)
 {
     int i;
     int j;
 
-    i = 1;
+    i = 0;
+    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0)
+        i = 1;
     while(inputs[i])
     {
         j = i + 1;
         while (inputs[j])
         {
-            if (ft_strncmp(inputs[i], inputs[j], ft_strlen(inputs[i])) != 0)
+            if (ft_atoi(inputs[i]) == ft_atoi(inputs[j]))
                 ft_exit();
            j++; 
         }
@@ -62,10 +83,11 @@ static char **is_one_string(char **inputs, int input_number)
     return (inputs);
 }
 
-void check_input(char **inputs, int input_number)
+char **check_input(char **inputs, int input_number)
 {
-    printf("(%d)\n",input_number);
     inputs = is_one_string(inputs, input_number);
     is_signed_number(inputs);
+    is_max_min(inputs);
     is_number_duplicated(inputs);
+    return (inputs);
 }

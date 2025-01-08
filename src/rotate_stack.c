@@ -6,24 +6,26 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:35:49 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/03 14:59:17 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/05 15:09:01 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
 static void rotate(t_stack **stack)
 {
     if (!stack && !*stack)
         return ;
+    t_stack *first_node;
     t_stack *last_node;
 
     last_node = get_last_node(*stack);
-    last_node->next = (*stack);
-    last_node->prev->next = NULL;
-    (*stack)->prev = last_node;
-    *stack = last_node;
+    first_node = (*stack);
+    *stack = first_node->next;
+    (*stack)->prev = NULL;
+    first_node->next = NULL;
+    first_node->prev = last_node;
+    last_node->next = first_node;
 }
 
 void ra(t_stack **a)

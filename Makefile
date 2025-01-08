@@ -6,7 +6,7 @@
 #    By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 18:20:13 by kben-tou          #+#    #+#              #
-#    Updated: 2025/01/03 21:25:41 by kben-tou         ###   ########.fr        #
+#    Updated: 2025/01/06 10:38:20 by kben-tou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ FILS = src/push_stack.c \
 		src/rotate_r_stack.c \
 		src/swap_stack.c \
 		src/check_inputs.c \
-		src/tools.c 
+		src/tools.c \
+		src/sort_stack.c \
+		src/lis.c
 
 CFLAGS =  -Wall -Wextra -Werror
 
