@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:56:50 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/08 22:57:48 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/10 00:48:55 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,79 +28,19 @@ int is_stack_sorted(t_stack **a)
 
 int is_in_lis(int *lis, int lis_size, int nb)
 {
-    for (int i = 0; i < lis_size; i++)
+    int i;
+
+    i = 0;
+    while (i < lis_size)
     {
         if (lis[i] == nb)
             return (1);
+        i++;
     }
+    
     return (0);
 }
 
-// static int find_node_position(t_stack *a, int find, int *val, int *smallest)
-// {
-//     t_stack *list;
-    
-//     list = a;
-//     int pos = 0;
-//     *smallest = list->value;
-
-//     while (list && list->next)
-//     {
-//         if (list->value < *smallest)
-//             *smallest = list->value;
-
-//         if (list->value < find && list->next->value > find)
-//         {
-//             *val = list->next->value;
-//             break;
-//         }
-//         pos++;
-//         list = list->next;
-//     }
-//     return pos;
-// }
-
-// static int next_number(t_stack **a, int nb_b, int size_a)
-// {
-//     int i;
-//     int j;
-//     t_stack *list;
-
-//     i = 0;
-//     j = nb_b;
-//     list = *a;
-//     while (i < size_a)
-//     {
-//         printf("%d) ",list->value);
-//         if (list->next == NULL)
-//             list = *a;
-//         else
-//             list = list -> next;
-//     }
-//     printf("\n");
-//     return (i); 
-// }
-
-// static int next_number(t_stack **a, int nb_b, int size_a)
-// {
-//     int i;
-//     int j;
-//     t_stack *list;
-
-//     i = 0;
-//     j = nb_b;
-//     list = *a;
-//     while (i < size_a)
-//     {
-//         printf("%d) ",list->value);
-//         if (list->next == NULL)
-//             list = *a;
-//         else
-//             list = list -> next;
-//     }
-//     printf("\n");
-//     return (i); 
-// }
 static int get_index_node(t_stack *stack, int node_value)
 {
     int i;
@@ -115,11 +55,14 @@ static int get_index_node(t_stack *stack, int node_value)
     }
     return (i);
 }
+
 static int next_number(t_stack *list, int nb_b, int size_a)
 {
     int next;
     int i;
 
+    if (!list)
+        return (0);
     next = get_smallest_node(list)->value;
     i = size_a;
     while (list && list->next)
@@ -134,176 +77,136 @@ static int next_number(t_stack *list, int nb_b, int size_a)
     return (next);
 }
 
-static int smallest_action_nb(t_stack **a, t_stack **b, int next, int nb_b)
+static int calculate_moves(t_stack **a, t_stack **b, int next_nb, int nb)
 {
-    int size_a;
-    int size_b;
-    int nb_b_index;
-    int next_index;
-    int actions[3];
-    int action_numbers;
+    int moves;
+    int a_size;
+    int b_size;
+    int pos_next;
+    int pos_nb;
 
-    size_b = stack_size(*b);
-    size_a = stack_size(*a);
-    size_a = next;
-    nb_b_index = get_index_node(*b, nb_b);
-    next_index = get_index_node(*a, next);
-    // printf("-%d)\n",nb_b_index);
-	// printf("-%d)\n",next_index);
-    if (nb_b_index < size_b / 2)
-        actions[0] = nb_b_index;
+    moves = 0;
+    a_size = stack_size(*a);
+    b_size = stack_size(*b);
+    pos_next = get_index_node(*a, next_nb);
+    pos_nb = get_index_node(*b, nb);
+    if (pos_next >= a_size / 2)
+        moves = a_size - pos_next;
     else
-        actions[0] = size_b - nb_b_index;
-
-    if (next_index < size_a / 2)
-        actions[0] += next_index;
+        moves = pos_next;
+    if (pos_nb >= b_size / 2)
+        moves += b_size - pos_nb;
     else
-        actions[0] += size_a - next_index;
-        
-    if (nb_b_index > next_index)
-        actions[1] = nb_b_index;
-    else
-        actions[1] = next_index;
-
-    if (size_b - nb_b_index > size_a - next_index)
-        actions[2] = size_b - nb_b_index;
-    else
-        actions[2] = size_a - next_index;
-    action_numbers = actions[0];
-    if (actions[1] < action_numbers)
-        action_numbers = actions[1];
-    if (actions[2] < action_numbers)
-        action_numbers = actions[2];
-    // exit(0);
-    // printf("?%d)\n",actions[0]);
-	// printf("?%d)\n",actions[1]);
-	// printf("?%d)\n",actions[2]);
-    return (action_numbers);
+        moves += pos_nb;
+    // printf("%d (%d) \n",nb, moves);
+    return (moves);
 }
 
-static t_stack *get_node_with_index(t_stack *stack, int index)
+static int get_less_mover_b(t_stack **a, t_stack **b, int nb_b)
 {
-    int i;
-
-    i = 0;
-    while (stack)
-    {
-        if (i == index)
-            break;
-        i++;
-        stack = stack->next;
-    }
-    return (stack);
-}
-
-static int find_the_right_nb(t_stack **a, t_stack **b)
-{
-    int size_b;
-    int size_a;
-    int next;
-    int indic_b;
+    int next_nb;
+    int hold;
+    int less;
+    int start;
     t_stack *iter_b;
-    int check;
-    int k;
-    int right;
 
-    size_b = stack_size(*b);
-    size_a = stack_size(*a);
-    indic_b = 0;
-    next = 0;
+    next_nb = 0;
     iter_b = *b;
+    next_nb = next_number(*a, nb_b, stack_size(*a));
+    less = calculate_moves(a, b, next_nb, nb_b);
+    start = nb_b;
     while (iter_b)
     {
-        next = next_number(*a, (iter_b)->value, size_a);
-        right = smallest_action_nb(a,b, next, (iter_b)->value);
-        if (right <= check)
+        next_nb = next_number(*a, iter_b->value, stack_size(*a));
+        hold = calculate_moves(a, b, next_nb, iter_b->value);
+        if (hold <= less)
         {
-            check = right;
-            k = indic_b;
+            less = hold;
+            start = iter_b->value;
         }
         iter_b = iter_b->next;
-        indic_b++;
-    }
-    return (get_node_with_index(*b, k)->value);
+    };
+    return (start);
 }
 
-static void from_b_to_a(t_stack **a, t_stack **b, int next, int nb_b)
+static void push_to_a(t_stack **a, t_stack **b, int nb_b)
 {
-    int index;
+    int next_nb;
+    int next_index;
+    int nb_index;
 
-    index = smallest_action_nb(a, b, next, nb_b);
-    if (index == 1)
+    next_nb = next_number(*a, nb_b, stack_size(*a));
+    next_index = get_index_node(*a, next_nb);
+    nb_index = get_index_node(*b, nb_b);
+    if ((next_index >= stack_size(*a) / 2) && (nb_index >= stack_size(*b) / 2))
     {
-        while ((*a)->value != next && (*b)->value != nb_b)
-            rrr(a, b);
+        while (next_nb != (*a)->value && nb_b != (*b)->value)
+            rrr(b, a);
     }
-    else if (index == 2)
+    else if ((next_index < stack_size(*a) / 2) && (nb_index < stack_size(*b) / 2))
     {
-        while ((*a)->value != next && (*b)->value != nb_b)
-            rr(a, b);
+        while (next_nb != (*a)->value && nb_b != (*b)->value)
+            rr(b, a);
     }
-
-    while ((*a)->value != next )
+    if (next_index >= (stack_size(*a) / 2))
     {
-        if (get_index_node(*a, next) > stack_size(*a) / 2)
+        while (next_nb != (*a)->value)
             rra(a);
-        else
+    }
+    else
+    {
+        while (next_nb != (*a)->value)
             ra(a);
     }
-    while ((*b)->value != nb_b)
+    if (nb_index >= (stack_size(*b) / 2))
     {
-        if (get_index_node(*b, nb_b) >= (stack_size(*b) / 2))
+        while (nb_b != (*b)->value)
             rrb(b);
-        else
+    }
+    else
+    {
+        while (nb_b != (*b)->value)
             rb(b);
     }
     pa(a, b);
-    // exit(0);
-}
-static void push_to_a_with_sort(t_stack **a, t_stack **b)
-{
-    int nb_to_move;
-    int next;
-
-    while (*b)
-    {
-        nb_to_move = find_the_right_nb(a, b);
-        next = next_number(*a, nb_to_move, stack_size(*a));
-        from_b_to_a(a, b, next, nb_to_move);
-    }
 }
 
 void sort_stack_a(t_stack **a, t_stack **b)
 {
-    int stack_len = stack_size(*a);
     int lis_size;
-    int *lis = get_lis(a, stack_len, &lis_size);
+    int *lis = get_lis(a, stack_size(*a), &lis_size);
+    int less_moves;
     int i;
-
-    i = 0;
-    while (i < stack_len)
+    i =  stack_size(*a);
+    while (i >= 0 )
     {
         if (is_in_lis(lis, lis_size, (*a)->value))
             ra(a);
         else
             pb(a, b);
-        i++;
+        i--;
     }
-    push_to_a_with_sort(a, b);
+    while ((*b))
+    {
+        less_moves = get_less_mover_b(a, b, (*b)->value);
+        push_to_a(a, b, less_moves);
+    }
+    
+    // push_to_a_with_sort(a, b);
     // Rotate to the smallest element
     while ((*a)->value != get_smallest_node(*a)->value)
     {
-        if (get_index_node(*a, (*a)->value) >= stack_len / 2)
+        if (get_index_node(*a, (*a)->value) >= stack_size(*a) / 2)
             rra(a);
         else
             ra(a);
     }
-
     // Print the sorted stack
     // t_stack *temp = *a;
-    // while (temp)
+    // i = 0;
+    // while (lis[i])
     // {
-    //     printf("{%d} ", temp->value);
-    //     temp = temp->next;
+    //     printf("{%d} ", lis[i]);
+    //     i++;
     // }
 }

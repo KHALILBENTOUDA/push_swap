@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:37:35 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/08 22:08:20 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/10 00:46:01 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void printf_stack(t_stack *stack)
         return ;
     while (stack != NULL)
     {
-        ft_printf("%d \n",stack->value);
+        ft_printf("(%d )\n",stack->value);
         stack = stack->next;
     }
 }
@@ -147,6 +147,7 @@ void af()
     system("leaks push_swap");
 }
 
+
 int main(int ac, char **av)
 {
     t_stack *a;
@@ -160,8 +161,8 @@ int main(int ac, char **av)
     av = check_input(av, ac);
     fill_stack(&a, av, ac);
     push_swap_sort(&a, &b);
-    printf_stack(a);
-    // printf_stack(b); 
+    // printf("\n");
+    // printf_stack(a); 
     ft_free_stack(&a);
     ft_free_stack(&b);
     return (0);
