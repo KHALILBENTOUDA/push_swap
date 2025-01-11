@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:56:50 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/10 00:48:55 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/11 21:40:21 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,50 +56,83 @@ static int get_index_node(t_stack *stack, int node_value)
     return (i);
 }
 
+static void to_array(int stack_len, t_stack *iter, int *temp_array)
+{
+    int i;
+
+    i = 0;
+    while (i < stack_len && iter)
+    {
+        temp_array[i] = iter->value;
+        i++;
+        iter = iter->next;
+    }
+}
 static int next_number(t_stack *list, int nb_b, int size_a)
 {
     int next;
-    int i;
+    int *newarr;
 
-    if (!list)
-        return (0);
     next = get_smallest_node(list)->value;
-    i = size_a;
-    while (list && list->next)
+    newarr = malloc(sizeof(int) * size_a);
+    if (!newarr)
+        exit(2);
+    to_array(size_a, list, newarr);
+    int i;
+    int j;
+
+    i = 0;
+    while (i < size_a)
     {
-        if (nb_b > list->value && nb_b < list->next->value)
-        {
-            next = list->next->value;
-            break;
-        }
-        list = list ->next;
+        j = turn_around(size_a, i);
+        if (newarr[i] < nb_b && newarr[j] > nb_b)
+            return (newarr[j]);
+        i++;
     }
     return (next);
+}
+static int get_min_index(int array[], int size)
+{
+    int i;
+    int min_i;
+
+    i = 0;
+    min_i = 0;
+    while (i < size)
+    {
+        if (array[i] <= array[min_i])
+            min_i = i;
+        i++;
+    }
+    return (min_i);
 }
 
 static int calculate_moves(t_stack **a, t_stack **b, int next_nb, int nb)
 {
-    int moves;
-    int a_size;
-    int b_size;
-    int pos_next;
-    int pos_nb;
+    int nb_index;
+    int next_index;
+    int actions[3];
 
-    moves = 0;
-    a_size = stack_size(*a);
-    b_size = stack_size(*b);
-    pos_next = get_index_node(*a, next_nb);
-    pos_nb = get_index_node(*b, nb);
-    if (pos_next >= a_size / 2)
-        moves = a_size - pos_next;
+    nb_index = get_index_node(*b, nb);
+    next_index = get_index_node(*a, next_nb);
+    if (nb_index >= stack_size(*b) / 2)
+        actions[0] = stack_size(*b) - nb_index;
     else
-        moves = pos_next;
-    if (pos_nb >= b_size / 2)
-        moves += b_size - pos_nb;
+        actions[0] = nb_index;
+    if (next_index >= stack_size(*a) / 2)
+        actions[0] += stack_size(*a) - next_index;
     else
-        moves += pos_nb;
-    // printf("%d (%d) \n",nb, moves);
-    return (moves);
+        actions[0] += next_index;
+
+    if (nb_index > next_index)
+        actions[1] = nb_index;
+    else
+        actions[1] = next_index;
+    if (stack_size(*b) - nb_index > stack_size(*a) - next_index)
+        actions[2] = stack_size(*b) - nb_index ;
+    else
+        actions[2] = stack_size(*a) - next_index;
+    return (actions[get_min_index(actions, 3)]);
 }
 
 static int get_less_mover_b(t_stack **a, t_stack **b, int nb_b)
@@ -112,22 +145,24 @@ static int get_less_mover_b(t_stack **a, t_stack **b, int nb_b)
 
     next_nb = 0;
     iter_b = *b;
-    next_nb = next_number(*a, nb_b, stack_size(*a));
-    less = calculate_moves(a, b, next_nb, nb_b);
+    less = INT_MAX;
     start = nb_b;
+
     while (iter_b)
     {
         next_nb = next_number(*a, iter_b->value, stack_size(*a));
         hold = calculate_moves(a, b, next_nb, iter_b->value);
-        if (hold <= less)
+
+        if (hold < less || (hold == less && get_index_node(*a, next_nb) > get_index_node(*a, start)))
         {
             less = hold;
             start = iter_b->value;
         }
         iter_b = iter_b->next;
-    };
+    }
     return (start);
 }
+
 
 static void push_to_a(t_stack **a, t_stack **b, int nb_b)
 {
@@ -138,34 +173,25 @@ static void push_to_a(t_stack **a, t_stack **b, int nb_b)
     next_nb = next_number(*a, nb_b, stack_size(*a));
     next_index = get_index_node(*a, next_nb);
     nb_index = get_index_node(*b, nb_b);
-    if ((next_index >= stack_size(*a) / 2) && (nb_index >= stack_size(*b) / 2))
+    while ((next_nb != (*a)->value && nb_b != (*b)->value))
     {
-        while (next_nb != (*a)->value && nb_b != (*b)->value)
+        if ((next_index >= stack_size(*a) / 2) && (nb_index >= stack_size(*b) / 2))
             rrr(b, a);
-    }
-    else if ((next_index < stack_size(*a) / 2) && (nb_index < stack_size(*b) / 2))
-    {
-        while (next_nb != (*a)->value && nb_b != (*b)->value)
+        else if ((next_index < stack_size(*a) / 2) && (nb_index < stack_size(*b) / 2))
             rr(b, a);
+        else
+            break;
     }
-    if (next_index >= (stack_size(*a) / 2))
-    {
-        while (next_nb != (*a)->value)
+    while (next_nb != (*a)->value) {
+        if (next_index >= stack_size(*a) / 2)
             rra(a);
-    }
-    else
-    {
-        while (next_nb != (*a)->value)
+        else
             ra(a);
     }
-    if (nb_index >= (stack_size(*b) / 2))
-    {
-        while (nb_b != (*b)->value)
+    while (nb_b != (*b)->value) {
+        if (nb_index >= stack_size(*b) / 2)
             rrb(b);
-    }
-    else
-    {
-        while (nb_b != (*b)->value)
+        else
             rb(b);
     }
     pa(a, b);
@@ -177,13 +203,21 @@ void sort_stack_a(t_stack **a, t_stack **b)
     int *lis = get_lis(a, stack_size(*a), &lis_size);
     int less_moves;
     int i;
+    int check;
+
+    check = stack_size(*a) - lis_size;
     i =  stack_size(*a);
+    
     while (i >= 0 )
     {
         if (is_in_lis(lis, lis_size, (*a)->value))
             ra(a);
         else
+        {
             pb(a, b);
+            if (--check <= 0)
+                break;
+        }
         i--;
     }
     while ((*b))
@@ -196,7 +230,7 @@ void sort_stack_a(t_stack **a, t_stack **b)
     // Rotate to the smallest element
     while ((*a)->value != get_smallest_node(*a)->value)
     {
-        if (get_index_node(*a, (*a)->value) >= stack_size(*a) / 2)
+        if (get_index_node(*a,  get_smallest_node(*a)->value) >= stack_size(*a) / 2)
             rra(a);
         else
             ra(a);
@@ -210,3 +244,33 @@ void sort_stack_a(t_stack **a, t_stack **b)
     //     i++;
     // }
 }
+  
+ 
+// rr
+// rr   
+// pa   
+// ra   
+// pa   
+// rra   
+// pa   
+// rr   
+// ra   
+// ra   
+// ra   
+// pa 
+
+
+// ra
+// ra
+// rrb
+// pa
+// ra
+// rrb
+// pa
+// rrb
+// pa
+// ra
+// ra
+// ra
+// rb
+// pa

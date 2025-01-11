@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:37:35 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/10 00:46:01 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:25:30 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int main(int ac, char **av)
     fill_stack(&a, av, ac);
     push_swap_sort(&a, &b);
     // printf("\n");
-    // printf_stack(a); 
+    // printf_stack(a);
     ft_free_stack(&a);
     ft_free_stack(&b);
     return (0);

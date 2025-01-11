@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:05:45 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/07 10:17:33 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:27:47 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,12 @@ int stack_size(t_stack *a)
         a = a->next;
     }
     return (counter);
+}
+
+int turn_around(int stack_len, int index)
+{
+    if (index >= stack_len - 1)
+        return (0);
+    else
+        return (index + 1);
 }
