@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:36:32 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/08 10:48:51 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:37:01 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ int stack_size(t_stack *a);
 int *get_lis(t_stack **stack, int stack_len, int *lis_size);
 t_stack *get_smallest_node(t_stack *a);
 int turn_around(int stack_len, int index);
-
+int is_in_lis(int *lis, int lis_size, int nb);
+int get_min_index(int array[], int size);
+int get_index_node(t_stack *stack, int node_value);
+void to_array(int stack_len, t_stack *iter, int *temp_array);
+void sort_three(t_stack **a);
+int bigest_item(t_stack *a);
+t_stack *get_smallest_node(t_stack *a);
+t_stack *add_new_node(int content);
+void sort_three(t_stack **a);
+void sort_five(t_stack **a, t_stack **b, int size_s);
+void fill_stack(t_stack **a, char **content, int ac);
+char	*ft_strjoin_new(char *s1, char *s2);
+char	*get_next_line(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:05:45 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/11 12:27:47 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:24:11 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,6 @@ void ft_free_stack(t_stack **head)
             *head = (*head)->next;
         }
     }
-}
-
-int stack_size(t_stack *a)
-{
-    int counter;
-
-    counter = 0;
-    if (!a)
-        return (0);
-    while (a)
-    {
-        counter++;
-        a = a->next;
-    }
-    return (counter);
 }
 
 int turn_around(int stack_len, int index)

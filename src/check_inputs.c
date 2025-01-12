@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:02:27 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/04 15:36:11 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/12 22:40:14 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void is_signed_number(char **inputs)
     char *nb;
 
     i = 0;
-    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0)
+    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0 \
+    || ft_strncmp(inputs[0], "./checker", ft_strlen(inputs[0])) == 0 )
         i = 1;
     while(inputs[i])
     {
@@ -44,7 +45,8 @@ static void is_max_min(char **inputs)
     char *nb;
 
     i = 0;
-    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0)
+    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0 \
+    || ft_strncmp(inputs[0], "./checker", ft_strlen(inputs[0])) == 0 )
         i = 1;
     while(inputs[i])
     {
@@ -61,7 +63,8 @@ static void is_number_duplicated(char **inputs)
     int j;
 
     i = 0;
-    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0)
+    if (ft_strncmp(inputs[0], "./push_swap", ft_strlen(inputs[0])) == 0 \
+    || ft_strncmp(inputs[0], "./checker", ft_strlen(inputs[0])) == 0 )
         i = 1;
     while(inputs[i])
     {
