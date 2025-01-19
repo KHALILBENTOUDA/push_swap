@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 11:28:59 by kben-tou          #+#    #+#             */
-/*   Updated: 2024/11/08 15:34:00 by kben-tou         ###   ########.fr       */
+/*   Created: 2024/10/22 18:34:51 by kben-tou          #+#    #+#             */
+/*   Updated: 2025/01/16 10:30:20 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../src/push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+size_t	ft_strlen(const char *s)
 {
-	t_list	*ptr;
+	size_t	i;
 
-	if (!del || !lst || !*lst)
-		return ;
-	ptr = *lst;
-	while (ptr)
-	{
-		del(ptr->content);
-		ptr = ptr->next;
-		free(*lst);
-		*lst = ptr;
-	}
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

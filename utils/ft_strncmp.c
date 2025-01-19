@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 11:28:06 by kben-tou          #+#    #+#             */
-/*   Updated: 2024/11/10 13:31:20 by kben-tou         ###   ########.fr       */
+/*   Created: 2024/10/23 15:46:02 by kben-tou          #+#    #+#             */
+/*   Updated: 2025/01/16 10:30:25 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../src/push_swap.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	s_len;
-	char	*sub;
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (NULL);
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-		return (ft_strdup(""));
-	if (start + len > s_len)
-		len = s_len - start;
-	sub = (char *)malloc(len + 1);
-	if (!sub)
-		return (NULL);
-	while (i < len)
+	while (i < n && (s1[i] || s2[i]))
 	{
-		sub[i] = s[i + start];
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	sub[i] = '\0';
-	return (sub);
+	return (0);
 }

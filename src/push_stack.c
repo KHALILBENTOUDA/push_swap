@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:08:16 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/15 13:39:45 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:13:43 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	push(t_stack **head, t_stack **stack)
 {
 	t_stack	*node;
 
+	if (!stack || !*stack)
+		return ;
 	node = *stack;
 	*stack = node->next;
 	if (*stack != NULL)

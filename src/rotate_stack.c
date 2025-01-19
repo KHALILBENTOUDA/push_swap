@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:35:49 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/15 13:39:33 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:13:29 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	rotate(t_stack **stack)
 	t_stack		*first_node;
 	t_stack		*last_node;
 
+	if (!stack || !*stack || !(*stack)->next)
+		return ;
 	last_node = get_last_node(*stack);
 	first_node = (*stack);
 	*stack = first_node->next;

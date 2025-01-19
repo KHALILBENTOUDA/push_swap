@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:36:32 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/15 15:57:14 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:07:30 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "../libft/libft.h"
 
 typedef struct s_stack
 {
@@ -63,5 +62,11 @@ int		next_number(t_stack *list, int nb_b, int size_a);
 void	ft_rotate_b(t_stack **b, int nb_index, int nb_b);
 void	ft_rotate_a(t_stack **a, int next_index, int next_nb);
 void	check_s(char *str);
+int		ft_isdigit(int c);
+int		ft_atoi(const char *str);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	**ft_split(char const *s, char c);
 
 #endif

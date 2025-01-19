@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:43:14 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/14 14:13:44 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:10:27 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,22 @@ void	execute(t_stack **a, t_stack **b, char *command)
 {
 	if (ft_strncmp(command, "ra\n", ft_strlen(command)) == 0)
 		ra(a, 1);
-	else if (ft_strncmp(command, "rra\n", ft_strlen(command)) == 0)
-		rra(a, 1);
 	else if (ft_strncmp(command, "rb\n", ft_strlen(command)) == 0)
 		rb(b, 1);
+	else if (ft_strncmp(command, "rr\n", ft_strlen(command)) == 0)
+		rr(b, a, 1);
+	else if (ft_strncmp(command, "rra\n", ft_strlen(command)) == 0)
+		rra(a, 1);
+	else if (ft_strncmp(command, "rrb\n", ft_strlen(command)) == 0)
+		rrb(b, 1);
+	else if (ft_strncmp(command, "rrr\n", ft_strlen(command)) == 0)
+		rrr(b, a, 1);
 	else if (ft_strncmp(command, "sa\n", ft_strlen(command)) == 0)
 		sa(a, 1);
 	else if (ft_strncmp(command, "sb\n", ft_strlen(command)) == 0)
 		sb(b, 1);
-	else if (ft_strncmp(command, "rrb\n", ft_strlen(command)) == 0)
-		rrb(b, 1);
-	else if (ft_strncmp(command, "rr\n", ft_strlen(command)) == 0)
-		rr(b, a, 1);
-	else if (ft_strncmp(command, "rrr\n", ft_strlen(command)) == 0)
-		rrr(b, a, 1);
+	else if (ft_strncmp(command, "ss\n", ft_strlen(command)) == 0)
+		ss(a, b, 1);
 	else if (ft_strncmp(command, "pa\n", ft_strlen(command)) == 0)
 		pa(a, b, 1);
 	else if (ft_strncmp(command, "pb\n", ft_strlen(command)) == 0)

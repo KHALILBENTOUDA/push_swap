@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:03:52 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/13 15:57:36 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/19 09:53:50 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_stack_sorted(t_stack **a)
 	t_stack	*list;
 
 	list = *a;
-	if (!*a || !a)
+	if (!a || !*a)
 		return (0);
 	while (list->next)
 	{

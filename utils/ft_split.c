@@ -6,11 +6,11 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:44:11 by kben-tou          #+#    #+#             */
-/*   Updated: 2024/11/10 13:34:33 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:30:08 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../src/push_swap.h"
 
 static size_t	words_count(const char *s, char c)
 {

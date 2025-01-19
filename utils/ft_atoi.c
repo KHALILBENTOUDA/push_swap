@@ -6,11 +6,11 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 20:27:37 by kben-tou          #+#    #+#             */
-/*   Updated: 2024/11/08 00:02:10 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:29:57 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../src/push_swap.h"
 
 int	ft_atoi(const char *str)
 {

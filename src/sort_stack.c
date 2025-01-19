@@ -6,7 +6,7 @@
 /*   By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:56:50 by kben-tou          #+#    #+#             */
-/*   Updated: 2025/01/14 11:21:34 by kben-tou         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:24:26 by kben-tou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static void	push_to_a(t_stack **a, t_stack **b, int nb_b)
 		if ((next_index > stack_size(*a) / 2) && \
 			(nb_index > stack_size(*b) / 2))
 			rrr(b, a, 0);
-		else if ((next_index < stack_size(*a) / 2) && \
-			(nb_index < stack_size(*b) / 2))
+		else if ((next_index <= stack_size(*a) / 2) && \
+			(nb_index <= stack_size(*b) / 2))
 			rr(b, a, 0);
 		else
 			break ;

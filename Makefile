@@ -6,7 +6,7 @@
 #    By: kben-tou <kben-tou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 18:20:13 by kben-tou          #+#    #+#              #
-#    Updated: 2025/01/15 15:59:51 by kben-tou         ###   ########.fr        #
+#    Updated: 2025/01/18 18:15:36 by kben-tou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,13 @@ FILS = src/push_stack.c \
 		src/sort_sample.c \
 		src/lis.c \
 		src/sort_utils.c \
-		src/get_next_line.c
+		src/get_next_line.c \
+		utils/ft_strlen.c \
+		utils/ft_split.c \
+		utils/ft_atoi.c \
+		utils/ft_strchr.c \
+		utils/ft_isdigit.c \
+		utils/ft_strncmp.c \
 
 FILS_B = src/checker.c \
 		src/push_stack.c \
@@ -36,7 +42,13 @@ FILS_B = src/checker.c \
 		src/tools2.c \
 		src/sort_sample.c \
 		src/sort_utils.c \
-		src/get_next_line.c
+		src/get_next_line.c \
+		utils/ft_strlen.c \
+		utils/ft_split.c \
+		utils/ft_atoi.c \
+		utils/ft_strchr.c \
+		utils/ft_strncmp.c \
+		utils/ft_isdigit.c \
 
 CFLAGS =  -Wall -Wextra -Werror
 
@@ -50,14 +62,14 @@ all: $(NAME)
 
 %.o: %.c src/push_swap.h
 	cc $(CFLAGS) -c $< -o $@
-	
-$(NAME): $(OBJS) libft/libft.a
-	cc $(CFLAGS) $(OBJS)  libft/libft.a -o $@
+
+$(NAME): $(OBJS)
+	cc $(CFLAGS) $(OBJS) -o $@
 
 bonus: $(NAME) $(CHECK)
 
 $(CHECK): $(OBJS_B)
-	cc $(CFLAGS) $(OBJS_B) libft/libft.a -o $@
+	cc $(CFLAGS) $(OBJS_B) -o $@
 
 clean: 
 	rm -rf $(OBJS)
